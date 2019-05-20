@@ -1,0 +1,90 @@
+
+\documentclass{amsart}
+
+\input{../preamble.tex}
+
+\usepackage{marginnote}
+
+\title{Notes on iterated integrals}
+
+\author{Nilay Kumar}
+
+\date{May 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Classical construction}
+
+\section{Factorization homology}
+
+In this section we recast the construction of the iterated integral map in more
+abstract language. The shift in perspective is in recognizing the Hochschild 
+homology of a commutative dg algebra as the factorization homology of the
+algebra over the circle,
+\begin{equation*}
+    HH_*(A) \simeq \int_{S^1} A.
+\end{equation*}
+For us, $A=\Omega^*(M)$ is the commutative algebra of differential forms on $M$
+a simply-connected manifold $M$. We construct a map
+\begin{equation*}
+    f \colon \int_{S^1}\Omega^*(M) \longrightarrow \Omega^*(LM)
+\end{equation*}
+using the definition of factorization homology.
+
+Let $A\colon \mathsf{Disk}_n\to \mathsf{Ch}$ be an $n$-disk algebra in cochain
+complexes of abelian groups. Then the factorization homology of $A$ over an
+$n$-manifold $X$ is defined as a homotopy colimit
+\begin{equation*}
+    \int_X A = \hocolim\left(\mathsf{Disk}_{n/X} \xrightarrow{\mathsf{fgt}}
+    \mathsf{Disk}_n \xrightarrow{A} \mathsf{Ch}\right).
+\end{equation*}
+Intuitively this definition tells us to factorize $X$ into disjoint disks
+labeled with
+elements of $A$ and to average over all such labeled factorizations, allowing 
+disks to collide via the multiplication on $A$. By definition, then, a map from
+the factorization homology to a cochain complex $C$ is a (homotopy) cocone
+$\eta\colon A\circ\mathsf{fgt} \to \underline{C}$, i.e. a (homotopy) natural
+transformation to the constant functor on $C$.
+
+In our setup, then, to construct the map $f$ it is enough to give a (homotopy) 
+natural transformation
+\begin{equation*}
+    \eta \in \Fun(\mathsf{Disk}_{1/S^1}, \mathsf{Ch})(A\circ\mathsf{fgt}, 
+    \underline{\Omega^*(LM)}).
+\end{equation*}
+This cocone is constructed as follows. Consider the composite
+\begin{equation*}
+    \mathsf{Disk}_{1/S^1} \longrightarrow ({}_{LM\backslash}\mathsf{Mfld})^\op
+    \longrightarrow \mathsf{CAlg}_{/\Omega^*(LM)}
+\end{equation*}
+where the first arrow is given by applying $\Maps_{\mathsf{Mfld}}(-,M)$,
+\begin{equation*}
+    \left(\sqcup_I \R \hookrightarrow S^1\right) \mapsto \left(LM \to 
+    \Maps_{\mathsf{Mfld}}(\sqcup_I\R, M)\right)
+\end{equation*}
+and the second arrow is given
+\begin{equation*}
+    \left(LM \to X\right) \mapsto \left(\Omega^*(X)\to\Omega^*(LM)\right).
+\end{equation*}
+The composite is therefore given
+\begin{equation*}
+    \left(\sqcup_I \R\hookrightarrow S^1\right) \mapsto 
+    \left(\Omega^*(\Maps(\sqcup_I\R, M)) \to \Omega^*(LM)\right).
+\end{equation*}
+Now as functors to an overcategory are the same as functors from the right cone, 
+we obtain a functor $\mathsf{Disk}_{1/S^1}^\triangleright \to \mathsf{Ch}$ 
+sending the cone object $\ast$ to $\Omega^*(LM)$. As the source category
+is isomorphic to $\mathsf{Disk}_{1/S^1}$, we obtain the desired 
+cocone.\marginnote{Work this out}
+
+\appendix
+
+\section{Differential forms on free loop spaces}
+
+results about forms on the presheaf versus forms on the Fr\'echet space
+
+
+\end{document}
+

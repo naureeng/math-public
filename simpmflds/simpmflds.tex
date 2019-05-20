@@ -1,0 +1,183 @@
+
+\documentclass{amsart}
+
+\input{../preamble.tex}
+
+\usepackage{marginnote}
+
+\title{Differential forms on $B_\bullet G$}
+
+\author{Nilay Kumar}
+
+\date{May 2019}
+
+\begin{document}
+
+\begin{abstract}
+    We begin by recalling basic notions around differential forms on simplicial
+    manifolds. The main object of study is the complex $A^q(B_\bullet G)$ of
+    $q$-forms on the classifying space of a compact Lie group $G$. We compute
+    the cohomology of this complex, originally due to Bott, and discuss as time
+    permits some applications and extensions.
+    These notes were prepared for John Francis' seminar course in the spring 
+    quarter of 2019 at Northwestern.
+\end{abstract}
+
+\maketitle
+
+\section{Simplicial manifolds}
+
+Write $\Delta$ for the simplicial indexing category and $\mathsf{Mfld}$ for the 
+category of finite-dimensional smooth manifolds (without boundary).
+
+\begin{definition}
+    A simplicial manifold $X_\bullet$ is a functor $X: \Delta^\op\to 
+    \mathsf{Mfld}$. A map of simplicial manifolds is a natural transformation of 
+    functors, and the resulting category is denoted $\mathsf{sMfld}$.
+\end{definition}
+
+\begin{example}
+    Here are a few standard examples of simplicial manifolds:\marginnote{finish}
+    \begin{enumerate}
+        \item discrete manifolds
+        \item classifying space of a lie group, universal space
+        \item nerve of a lie groupoid, Cech nerve, prev example
+        \item $W, \bar W$ of simplicial Lie group
+        \item Getzler-Pohorence, integration over local Lagrangians
+    \end{enumerate}
+\end{example}
+
+Let me give some motivation for the introduction of simplicial manifolds.
+As simplicial manifolds are in particular simplicial topological spaces, it 
+is not surprising that the novelty in studying simplicial manifolds comes from 
+applications where the smooth structure is of interest.
+
+Consider, for example, the Chern-Weil approach to characteristic classes. Given 
+a complex vector bundle $\pi: E\to M$ one obtains the Chern classes of $E$ by 
+choosing a connection $\nabla$ on $E$ and then taking the trace of a certain 
+polynomial in the curvature $F^\nabla\in\Omega^2(M)$. Changing the connection 
+modifies the resulting form by an exact form (the differential of an expression 
+involving the Chern-Simons secondary invariant) whence the de Rham cohomology 
+class is independent of this choice. From a topological perspective, this 
+cohomology class should be pulled back from an appropriate classifying space 
+along a map classifying the vector bundle. One would like to lift this to
+a chain level statement but the classifying space is not a manifold in general
+and thus does not obviously support differential forms, let alone universal 
+Chern-Weil forms. Such a lift to the de Rham complex was first constructed by 
+Shulman in his Berkeley thesis, and roughly imitates the Chern-Weil construction 
+for the simplicial $G$-bundle $E_\bullet G\to B_\bullet G$.
+
+Another motivation comes from physics. In many quantum field theories the 
+numerical invariants calculated by path integral methods fail to make sense, 
+even at a physical level of rigor, due to the presence of what are called 
+anomalies. Roughly speaking the presence of an anomaly signifies that the 
+integrand is not a function but instead a section of a non-trivial line bundle. 
+This was first made precise in an example by Quillen and then generalized by
+Bismut and Freed. Often the anomaly can be ``trivialized'' by further geometric 
+constraints on the underlying spacetime manifold such as a spin structure.
+For some string theories the anomaly is trivialized by a string structure on 
+spacetime. The string group is a 3-connected cover of the spin group
+but is a priori defined only as a topological group. Promoting the string 
+group to some sort of smooth object is not so easy; if one wants to stay in the 
+world of finite-dimensional manifolds, one is forced to view it as a 2-group: a 
+simplicial manifold satisfying certain horn-lifting properties. Much more 
+generally, it is interesting to ask for an analog of Lie's third theorem for 
+$L_\infty$-algebras. The ``Lie group'' corresponding to a given 
+$L_\infty$-algebra is naturally a simplicial Banach manifold.
+
+Finally, as less of a motivation and more of a categorical outlook, I would like 
+to mention that Kan simplicial manifolds offer relatively concrete and hands-on
+representatives for (nice enough) smooth stacks. Two Kan simplicial 
+manifolds are to be considered equivalent as smooth stacks if they are connected 
+by ``hypercovers.'' These are maps of simplicial manifolds that generalize the 
+augmentation of the Cech nerve of a good open cover. That such maps should be 
+equivalences is already evident in the definition of a smooth manifold via 
+atlases.
+
+With these remarks in mind, let us turn to the notion of differential forms on 
+simplicial manifolds. 
+\begin{definition}
+    Let $X_\bullet$ be a simplicial manifold. The de Rham complex of $X_\bullet$ 
+    is the cosimplicial cochain complex given as the composition
+    \begin{equation*}
+        A^*X : \Delta \xrightarrow{X_\bullet} \mathsf{Mfld}^\op
+        \xrightarrow{A^*(-)} \mathsf{Ch}(\mathsf{Vect}_\R).
+    \end{equation*}
+    For a fixed $q\geq 0$ in particular we obtain a cosimplicial vector space of
+    $q$-forms on $X$,
+    \begin{equation*}
+        A^qX : \Delta \to \mathsf{Vect}_\R.
+    \end{equation*}
+\end{definition}
+
+As usual there is a functor
+\begin{equation*}
+    \text{Moore}: \mathsf{cCh(Vect_\R)} \to \mathsf{Ch(Ch(Vect_\R))}
+\end{equation*}
+that assigns to a cosimplicial cochain complex the corresponding Moore double 
+complex (one might instead take the normalized double complex). Now to a double 
+complex we can assign its total complex: we will often abuse terminology and 
+refer to this complex as the de Rham complex of $X_\bullet$.
+
+\begin{example}
+    Here are the two most basic examples:
+    \begin{itemize}
+        \item If $X_\bullet$ is zero-dimensional, i.e. just a simplicial set,
+            then the 
+            de Rham complex $A^*X$ is precisely the simplicial cochain complex
+            of $X_\bullet$ with coefficients in $\R$.
+        \item If $X_\bullet=X$ is the constant simplicial object on $X\in 
+            \mathsf{Mfld}$ then $A^*X$ is (quasi-isomorphic to, unless one took
+            the normalized complex) the usual complex of differential forms on
+            $X$.
+    \end{itemize}
+\end{example}
+
+\begin{remark}
+    There is a product on the de Rham complex of a simplicial manifold
+    coming from the wedge product of differential forms that 
+    turns out not to be commutative on the nose -- instead, it gives the de
+    Rham complex the structure of a $C_\infty$-algebra. The homotopy coherent 
+    nature of the multiplication is not surprising given the first example 
+    above.
+\end{remark}
+
+As we noted earlier, a simplicial manifold is naturally a simplicial topological 
+space. Thus we obtain a functor
+\begin{equation*}
+    |-| : \mathsf{sMfld} \to \mathsf{Spaces}
+\end{equation*}
+given by first taking the underlying simplicial space and then taking the 
+geometric realization.
+
+de Rham complex of a simplicial manifold, simplicial de Rham theorem
+
+\section{Bott's argument}
+
+goal: compute cohomology of the vertical complex of forms on BG
+
+3 steps: basic on EG, functions on EG, Dold-Puppe argument
+
+basic forms on on EG: introduce the suspension cosimplicial object
+
+use Haar measure on G to show functions on EG are (invariantly) contractible
+
+Dold-Puppe argument to pass the wedge power inside as a symmetric power
+
+\section{Applications}
+
+notion of closed forms, invariance under hypercovers
+
+symplectic structures on BG
+
+application: symplectic reduction, quasi-Hamiltonian reduction, Chern-Simons 
+theory
+
+Shulman's construction of the symplectic form
+
+unique differential refinement of chern classes
+
+extension to n-gerbes
+
+\end{document}
+
