@@ -3,6 +3,8 @@
 
 \input{../preamble.tex}
 
+\DeclareMathOperator{\diag}{\text{diag}}
+
 \usepackage{marginnote}
 
 \title{Differential forms on $B_\bullet G$}
@@ -112,10 +114,10 @@ simplicial manifolds.
 
 As usual there is a functor
 \begin{equation*}
-    \text{Moore}: \mathsf{cCh(Vect_\R)} \to \mathsf{Ch(Ch(Vect_\R))}
+    N: \mathsf{cCh(Vect_\R)} \to \mathsf{Ch(Ch(Vect_\R))}
 \end{equation*}
-that assigns to a cosimplicial cochain complex the corresponding Moore double 
-complex (one might instead take the normalized double complex). Now to a double 
+that assigns to a cosimplicial cochain complex the corresponding normalized
+double complex. Now to a double 
 complex we can assign its total complex: we will often abuse terminology and 
 refer to this complex as the de Rham complex of $X_\bullet$.
 
@@ -150,34 +152,362 @@ space. Thus we obtain a functor
 given by first taking the underlying simplicial space and then taking the 
 geometric realization.
 
-de Rham complex of a simplicial manifold, simplicial de Rham theorem
+simplicial de Rham theorem \marginnote{finish}
 
 \section{Bott's argument}
 
-goal: compute cohomology of the vertical complex of forms on BG
+In this section we focus on $q$-forms on the simplicial manifold $B_\bullet G$.
+Recall that $A^q(B_\bullet G)$ is a cosimplicial vector space to which we
+assign the associated normalized complex. Following Bott, we will compute the 
+cohomology of this complex; I thank Ezra Getzler for explaining this proof
+to me.
 
-3 steps: basic on EG, functions on EG, Dold-Puppe argument
+\begin{theorem}[Bott '73]
+    Let $G$ be a compact Lie group and $q$ be a non-negative integer.
+    Then
+    \begin{equation*}
+        H^i(A^q(B_\bullet G)) \cong
+        \begin{cases}
+            \Sym^q(\fr g^\vee)^G & i=q \\
+            0 & i\neq q
+        \end{cases}
+    \end{equation*}
+\end{theorem}
 
-basic forms on on EG: introduce the suspension cosimplicial object
+The proof of this result has three ingredients:
+\begin{enumerate}
+    \item $A^q(B_\bullet G)$ can be obtained as the \textit{basic} 
+        $q$-forms on the universal principal $G$-bundle $E_\bullet G$
+    \item by compactness of $G$, the cosimplicial $G$-module $C^\infty(E_\bullet 
+        G)$ admits an extra codegeneracy \marginnote{as a simplicial 
+        $G$-module??} 
+    \item the first (nonadditive) derived functor of the
+        exterior power functor $\Lambda^q$ is a $q$-fold shift of the symmetric
+        power functor $\Sym^q$.
+\end{enumerate}
 
-use Haar measure on G to show functions on EG are (invariantly) contractible
+Let's start with the first step. Instead of working with differential forms on 
+the classifying space $B_\bullet G$, we will work on the total space, which 
+affords greater flexibility.
 
-Dold-Puppe argument to pass the wedge power inside as a symmetric power
+\begin{proposition}
+    Let $\pi: P\to M$ be a smooth principal $G$-bundle. Then the pullback 
+    \begin{equation*}
+        A^q(M) \xrightarrow{\pi^*} A^q(P)
+    \end{equation*}
+    induces an isomorphism of $A^q(M)$ onto the subspace $A^q_\text{basic}(P)$ 
+    of basic $q$-forms on $P$. Recall that $\omega\in A^q(P)$ is basic if it is 
+    $G$-invariant and horizontal:
+    \begin{equation*}
+        R_g^*\omega = \omega \qquad \text{and} \qquad \omega|_{\pi^{-1}(m)}=0
+    \end{equation*}
+    for all $m\in M$. Here $R_g: P\to P$ is the right action of $g\in G$ on $P$.
+\end{proposition}
+The proof is straightforward.
+
+\begin{corollary}
+    Pullback along $\pi: E_\bullet G \to B_\bullet G$ induces an isomorphism
+    of complexes
+    \begin{equation*}
+        A^q(B_\bullet G) \cong A^q_\text{basic}(E_\bullet G) \subset 
+        A^q(E_\bullet G).
+    \end{equation*}
+\end{corollary}
+
+\begin{definition}
+    Define the cosimplicial vector space $C^\bullet\R$ as the composite
+    \begin{equation*}
+        C^\bullet\R : \Delta \hookrightarrow \mathsf{Set} 
+        \xrightarrow{\mathsf{free}} \mathsf{Vect}_\R.
+    \end{equation*}
+    In other words, $C^n\R$ is the vector space of dimension $n+1$: denote by  
+    $e_i$ the basis vector of $C^n\R=\R^{n+1}$ corresponding to $i\in [n]$. The 
+    $i$th coface map is the inclusion that misses $e_i$ and the $i$th 
+    codegeneracy map is the surjection that sends $e_i$ and $e_{i+1}$ to $e_i$.
+    There is a (levelwise) surjection of cosimplicial vector spaces
+    \begin{equation*}
+        C^\bullet \R \xrightarrow{s} \R \to 0
+    \end{equation*}
+    to the constant one-dimensional cosimplicial vector space given (in degree 
+    $n$)
+    \begin{equation*}
+        s\left( \sum_{i=0}^{n+1} a_i e_i \right) = \sum_{i=0}^{n+1} a_i.
+    \end{equation*}
+    If we define $\Sigma^\bullet \R=\ker s$ we obtain a short exact sequence of 
+    cosimplicial vector spaces
+    \begin{equation*}
+        0 \to \Sigma^\bullet \R \to C^\bullet \R \to \R \to 0.
+    \end{equation*}
+\end{definition}
+
+\begin{remark}
+    Beware that the map $s$ is not a coaugmentation of $C^\bullet\R$ -- it
+    goes the wrong way!
+\end{remark}
+
+Now for any cosimplicial vector space $V^\bullet$ we obtain cosimplicial vector 
+spaces
+\begin{align*}
+    C^\bullet V &= C^\bullet\R \otimes_\R V^\bullet \\
+    \Sigma^\bullet V &= \Sigma^\bullet \R \otimes_\R V^\bullet
+\end{align*}
+that we call the cone and suspension of $V^\bullet$, respectively.
+They fit into a short exact sequence
+\begin{equation*}
+    0 \to \Sigma^\bullet V \to C^\bullet V \to V^\bullet \to 0.
+\end{equation*}
+Notice that \marginnote{Eilenberg-Zilber?}
+\begin{align*}
+    H^*NC^\bullet V &= H^*(N(C^\bullet\R \otimes V^\bullet)) \\
+    &= H^*NC^\bullet\R \otimes H^*NV^\bullet \\
+    &= 0
+\end{align*}
+whence
+\begin{equation*}
+    H^*NC^\bullet V = 0 \qquad \text{and} \qquad H^*N\Sigma^\bullet V=V[-1].
+\end{equation*}
+
+With this notation established, we arrive at the statement of the first result.
+\begin{lemma}[Decomposition lemma]
+    Let $G$ be a Lie group and let $\fr g^\vee$ be the vector space of 
+    left-invariant 1-forms on $G$, viewed as a $G$-module under 
+    right-multiplication. Then
+    \begin{equation*}
+        A^q(B_\bullet G) \cong \diag\left( A^0(E_\bullet G) \otimes 
+        \Lambda^q\Sigma^\bullet\fr g^\vee\right)^G.
+    \end{equation*}
+\end{lemma}
+In words: the cosimplicial vector space of $q$-forms on $B_\bullet G$ is 
+isomorphic to the diagonal cosimplicial vector space obtained from the 
+$G$-invariants of the bicosimplicial $G$-module in parentheses.
+\begin{proof}
+    As noted above,
+    \begin{equation*}
+        A^q(B_\bullet G) \cong A^q_\text{basic}(E_\bullet G).
+    \end{equation*}
+    The right hand side of the decomposition above is just another way of 
+    capturing the basic forms on $E_\bullet G$. We can see this as follows.
+    If we choose a basis for the Lie algebra $\fr g$ then we obtain a global 
+    frame for the cotangent bundle of $G$, whence
+    $A^1(G^{n+1}) = A^0(G^{n+1})\otimes(\fr g^\vee)^{\oplus n+1}.$
+    More explicitly, we have an isomorphism
+    \begin{align*}
+        \phi_n : A^0(E_nG) \otimes C^n\fr g^\vee &\to A^1(E_nG) \\
+        \sum_{k=0}^n f_k \otimes \xi_k &\mapsto \sum_{k=0}^n f_k \cdot \pi_k^* 
+        \xi_k,
+    \end{align*}
+    where $\pi_k:E_nG=G^{n+1}\to G$ is projection onto the $k$th factor.
+    We are interested in the subspace of horizontal forms, i.e. those that 
+    restricted to a fiber of $E_nG \to B_nG$ are zero. For $p=(p_0,\ldots, 
+    p_n)\in E_nG$ write the inclusion of a fiber
+    \begin{align*}
+        \iota_p : G &\to E_nG=G^{n+1} \\
+        g &\mapsto (p_0g, \ldots, p_ng).
+    \end{align*}
+    If we now restrict along $\iota_p$ we get
+    \begin{align*}
+        \iota_p^*\left( \sum_{k=0}^n f_k \cdot \pi_k^*\xi_k \right)
+        &= \sum_{k=0}^n f_k \cdot (\pi_k\circ \iota_p)^* \xi_k
+        = \sum_{k=0}^n f_k \cdot \xi_k.
+    \end{align*}
+    Here we have used that the composition $\pi_k\circ \iota_p: G\to G$ is
+    left-multiplication by $p_k$,
+    \begin{equation*}
+        \pi_k(\iota_p(g)) = \pi_k(p_0g,\ldots,p_ng) = p_kg,
+    \end{equation*}
+    together with the left-invariance of $\xi_k\in\fr g^\vee \subset A^1(G)$.
+    We thus conclude that
+    \begin{equation*}
+        A^1_\text{horiz}(E_nG) = A^0(E_nG) \otimes \Sigma^n\fr g^\vee,
+    \end{equation*}
+    from which we obtain
+    \begin{equation*}
+        A^q_\text{horiz}(E_nG) = A^0(E_nG) \otimes \Lambda^q\Sigma^n\fr g^\vee,
+    \end{equation*}
+    Taking invariants (and checking cosimplicial structure maps) results in the 
+    desired decomposition
+    \begin{equation*}
+        A^q_\text{basic}(E_\bullet G) = \diag \left( A^0(E_\bullet G)\otimes 
+        \Lambda^q \Sigma^\bullet\fr g^\vee \right)^G.
+    \end{equation*}
+\end{proof}
+
+\begin{proposition}
+    For $G$ compact the Haar measure furnishes a homotopy equivalence
+    \begin{equation*}
+        \diag\left( A^0(E_\bullet G) \otimes \Lambda^q\Sigma^\bullet\fr 
+        g^\vee \right)^G \simeq \left( \Lambda^q\Sigma^\bullet\fr g^\vee 
+        \right)^G.
+    \end{equation*}
+    of cosimplicial vector spaces.\marginnote{state this correctly}
+\end{proposition}
+\begin{proof}
+    \marginnote{Finish}
+\end{proof}
+
+We now have an equivalence of cosimplicial vector spaces
+\begin{equation*}
+    A^q(B_\bullet G) \simeq \left( \Lambda^q\Sigma^\bullet\fr g^\vee \right)^G.
+\end{equation*}
+To finish the proof of Bott's result we must now compute the cohomology of the 
+normalized complex of the right-hand side.
+\begin{proposition}
+    There is a weak equivalence\marginnote{State this correctly}
+    \begin{equation*}
+        N\left( \Lambda^q\Sigma^\bullet\fr g^\vee \right)^G
+        \simeq \Sym^q(\fr g^\vee)^G[-q].
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    In the language of Dold and Puppe, we are computing the first (nonadditive) 
+    derived functor of the $q$th tensor power functor.\marginnote{finish}
+\end{proof}
+
 
 \section{Applications}
 
-notion of closed forms, invariance under hypercovers
+The computation of differential forms on $B_\bullet G$ has a number of 
+interesting applications; here I will focus on some immediate corollaries 
+pertaining to the topology/geometry of the classifying stack itself.
 
-symplectic structures on BG
+There is a relatively recent notion of (shifted) symplectic structures on
+(derived) stacks due to Pantev-Toen-Vaqui\'e-Vezzosi: one of their fundamental 
+examples is the classifying stack of a reductive algebraic group. In the smooth 
+setting that we are working in, we obtain the following.
+\begin{corollary}
+    For $G$ a compact Lie group,
+    the set of 2-shifted symplectic structures on $B_\bullet G$ is the 
+    set of Killing forms on $\fr g$ (nondegenerate invariant symmetric
+    bilinear forms on $\fr g$).
+\end{corollary}
 
-application: symplectic reduction, quasi-Hamiltonian reduction, Chern-Simons 
-theory
+Once we define what a 2-shifted closed form on a simplicial manifold is, this 
+corollary is immediate. That the notion needs defining in the first place stems
+from the fact a cocycle in a complex is not a homotopy 
+invariant object. The way out is to notice that the de Rham complex of 
+manifold comes with a canonical filtration known as the Hodge filtration
+\begin{equation*}
+    F^pA^*X = 0 \to A^pX \to A^{p+1}X \to \cdots,
+\end{equation*}
+and that
+\begin{equation*}
+    H^0(F^pA^*X[p]) = A^p_\text{cl}X.
+\end{equation*}
 
-Shulman's construction of the symplectic form
+\begin{definition}
+    Let $X_\bullet$ be a simplicial manifold. The complex of closed $p$-forms on
+    $X_\bullet$ is defined to be the total complex of the double complex 
+    obtained by applying $F^pA^*$ to $X_\bullet$,
+    \begin{equation*}
+        A_\text{cl}^p(X_\bullet) = F^pA^*X_\bullet[p].
+    \end{equation*}
+    An $n$-shifted closed $p$-form $\omega$ is a degree $n$ cocycle of this
+    complex:
+    \begin{equation*}
+        \omega \in Z^{n+p}(F^pA^*X_\bullet).
+    \end{equation*}
+\end{definition}
 
-unique differential refinement of chern classes
+Let's unpack what an $n$-shifted closed $p$-form is, more concretely.
+We have
+\begin{equation*}
+    \omega = (\omega_0, \ldots, \omega_n), \qquad \omega_i\in 
+    A^{p+n-i}(X_i)
+\end{equation*}
+such that
+\begin{align*}
+    \delta\omega_n &= 0 \\
+    \delta\omega_{n-1} &= \pm d\omega_n \\
+    \vdots & \\
+    \delta\omega_0 &= \pm d\omega_1 \\
+    d\omega_0 &=0.
+\end{align*}
+In other words, a $n$-shifted closed $p$-form is a $\delta$-closed $p$-form
+$\omega_n$ on $X_n$ (hence the $n$-shifted $p$-form) whose de Rham differential 
+is $\delta$-exact via $\omega_{n-1}\in A^{p+1}(X_{n-1})$. Similarly 
+$\omega_{n-1}$ is closed up to a $\delta$-exact form, and so on and so forth 
+until $\omega_0$, which is a closed $(p+n)$-form on $X_0$.
 
-extension to n-gerbes
+\begin{example}
+    For $X_\bullet = B_\bullet G$ in particular we have
+    \begin{equation*}
+        A^p_\text{cl}(B_\bullet G) = 0 \to A^p(G) \to A^p(G^2)\oplus 
+        A^{p+1}G \to A^p(G^3)\oplus A^{p+1}(G^2)\oplus A^{p+2}G \to \cdots
+    \end{equation*}
+    A 2-shifted closed 2-form on $B_\bullet G$ is thus the data of
+    \begin{equation*}
+        \omega_1\in A^3(G) \qquad \text{and} \qquad \omega_2\in A^2(G^2)
+    \end{equation*}
+    such that
+    \begin{equation*}
+        d\omega_1 = 0 \qquad \delta\omega_1 = \pm d\omega_2 \qquad 
+        \delta\omega_2=0.
+    \end{equation*}
+\end{example}
+
+\begin{proposition}
+    The cohomology of the complex of closed $p$-forms on the simplicial manifold 
+    $B_\bullet G$ is
+    \begin{equation*}
+        H^q(A^p_\text{cl}B_\bullet G) =
+        \begin{cases}
+            0 & q < p \\
+            \Sym^q(\fr g^\vee)^G & q\geq p
+        \end{cases}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Consider the spectral sequence for the double complex of closed $p$-forms on 
+    $B_\bullet G$ where on the $E_2$-page we first take horizontal cohomology and
+    then vertical cohomology. Bott's computation tells us that the $q$th row is 
+    $\Sym^q(\fr g^\vee)^G$ concentrated in degree $q$. Thus there are no 
+    nontrivial differentials and the spectral sequence collapses at the $E_2$ 
+    page. The result follows.
+\end{proof}
+
+We see in particular that the set of 2-shifted closed 2-forms
+on $B_\bullet G$ is in bijection with 
+$G$-invariant symmetric bilinear forms on $\fr g$.
+Now, I don't want to go into the notion of nondegeneracy of a 2-form on a 
+simplicial manifold, but it is hopefully reasonable that it restricts us to 
+nondegenerate such bilinear forms, so I will declare victory here.
+
+\begin{remark}
+    Let $G$ be a matrix group like $U(n)$.\marginnote{connectedness?}
+    In this case the data of a symplectic structure is the data of forms 
+    $\omega_1$ and $\omega_2$ living on products of $U(n)$ and so it is 
+    reasonable to hope that, given a Killing form on $\fr{u}(n)$, there is some 
+    sort of concrete formula for these differential forms.
+    This is the due to Shulman, who proceeds, roughly, by 
+    choosing a universal connection on $E_nG\to B_nG$ and using the Killing form 
+    on $\fr{u}(n)$ to construct $\omega_1$ and $\omega_2$ following Chern and 
+    Weil. In particular, the symplectic form on $B_\bullet U(n)$ is constructed 
+    as the Shulman representative for the second Chern class $c_2$.
+\end{remark}
+
+\begin{remark}
+    We have focused here on $B_\bullet G$, a simplicial representative for the 
+    classifying space of principal $G$-bundles. There exist higher categorical 
+    analogs of principal bundles known as gerbes: instead of $G$-valued 
+    transition functions on double overlaps of a cover, they're defined by 
+    transition functions on triple overlaps. At least in the abelian case, there 
+    is a nice theory of these ``bundle gerbes'' and they are classified by the 
+    higher delooping $B^2A$ (or if you wish $\bar W^2A$).
+    It should be straightforward to prove an analog of Bott's result for the
+    classifying spaces $B^nA$ for 
+    $A$ a compact abelian Lie group ($A=U(1)$ is of interest, say):
+    \begin{equation*}
+        H^i(A^q(B^n_\bullet A)) \cong
+        \begin{cases}
+            \Sym^q(\fr a^\vee)^A & q = 2n \\
+            0 & q \neq 2n
+        \end{cases}
+    \end{equation*}
+    and to conclude that $B^nA$ is equipped with a $2n$-shifted symplectic 
+    structure, though I haven't worked out the details (I expect the proof to be 
+    more or less identical if one uses the model $\bar W^nA$).
+\end{remark}
+
 
 \end{document}
 
