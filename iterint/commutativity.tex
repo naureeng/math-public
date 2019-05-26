@@ -1,0 +1,113 @@
+
+\documentclass{amsart}
+
+\input{../preamble.tex}
+
+\usepackage{marginnote}
+
+\begin{document}
+
+\noindent\textbf{Claim:} the iterated integral map
+\begin{equation*}
+    \sigma: CC_*(\Omega^*(M)) \to \Omega^*(LM)
+\end{equation*}
+on differential forms is a map of graded vector spaces, but 
+checking that it is a map of chain complexes uses the (graded) commutativity of 
+differential forms. We will sketch this below.
+
+The reason I want to emphasize this point is because
+the analogous iterated integral map for (\v Cech-)Deligne cocycles will not be
+a map of chain complexes. Since the Beilinson-Deligne cup product is commutative
+up to homotopy, we will instead get $\sigma\circ b = d\circ\sigma + d\circ h$
+for some term $h$. So we still obtain a map on cohomologies but not a map of 
+chain complexes. This is problematic because the usual tools of spectral 
+sequences etc rely on having a map of chain complexes (or perhaps this notion of 
+up-to-exact-term chain map is enough?).
+
+%The product structure on the Deligne complex is rather 
+%subtle (it is not a dg algebra but a graded algebra in complexes $\oplus_p
+%\Z_d(p)$) so this is just an educated guess for now. I will try to work it out 
+%more carefully.
+
+\hrulefill \\
+
+Let $M$ be a (simply connected) manifold.
+We denote by $CC_*(-)$ the Hochschild chain complex of a dg algebra.
+We define a map
+\begin{equation*}
+    \sigma: CC_*(\Omega^*(M))=\bigoplus_{k=0}^\infty \Omega^*(M)^{\otimes k} \to 
+    \Omega^*(LM)
+\end{equation*}
+as follows. Let
+\begin{equation*}
+    \omega_0\otimes \cdots \otimes \omega_k \in CC_k(\Omega^*(M)) = 
+    \Omega^*(M)^{\otimes k}.
+\end{equation*}
+Using the projection maps $p_j: M^{k+1}\to M$, we obtain
+\begin{equation*}
+    p_0^*\omega_0 \wedge \cdots p_k^*\omega_k \in \Omega^*(M^{k+1}).
+\end{equation*}
+We transgress this form along the diagram:
+\begin{equation*}
+    \begin{tikzcd}
+        \Delta^k \times LM \rar{ev_k}\dar{\pi} & M^{k+1} \\
+        LM
+    \end{tikzcd}
+\end{equation*}
+where
+\begin{align*}
+    ev_k : \Delta^k \times LM &\to M^{k+1} \\
+    (t_1,\ldots, t_k, \ell) &\mapsto (\ell(0),\ell(t_1),\ldots,\ell(t_k)).
+\end{align*}
+So we obtain
+\begin{equation*}
+    \sigma(\omega_0\otimes\cdots\otimes\omega_k) =
+    \pi_!ev_k^*(p_0^*\omega_0\wedge\cdots\wedge p_k^*\omega_k) \in \Omega^*(LM).
+\end{equation*}
+Under a suitable grading of the Hochschild complex (see Getzler-Jones-Petrack) 
+this map extends to a map $\sigma$ of graded vector spaces.
+
+Let us check that $\sigma$ is a map of chain complexes, i.e. that
+\begin{equation}
+    \sigma \circ b = d \circ \sigma,
+    \label{chainmap}
+\end{equation}
+where
+\begin{align}
+    b(\omega_0\otimes \cdots \otimes \omega_k) &=
+    \sum_{j=0}^k \pm \omega_0\otimes\cdots \otimes
+    d\omega_j \otimes \cdots \omega_k \label{l1}\\
+    &+ \sum_{j=0}^{k-1} \pm \omega_0\otimes \cdots\otimes
+    (\omega_j\wedge\omega_{j+1}) \otimes \cdots \otimes \omega_k \label{l2} \\
+    & \pm \omega_k\wedge\omega_0\otimes\omega_1\otimes \cdots\otimes 
+    \omega_{k-1}\label{l3}
+\end{align}
+is the Hochschild differential. We can already see where commutativity of 
+differential forms will be necessary: on the left hand side of 
+eq.~\ref{chainmap} we have a term that looks like
+$\sigma(\omega_k\wedge\omega_0\otimes \cdots)$ whereas on the right hand side of 
+eq.~\ref{chainmap}, the 
+differential forms will always be in order. 
+
+More explicitly, using Stokes' theorem for $\pi_!$, we have
+\begin{align*}
+    d\sigma(\omega_0\otimes\cdots\otimes\omega_k) &= 
+    d\pi_!ev_k^*(p_0^*\omega_0\wedge\cdots\wedge p_k^*\omega_k) \\
+    &= \int_{\Delta^k}ev_k^*d(p_0^*\omega_0\wedge\cdots\wedge p_k^*\omega_k) \\
+    &\pm\int_{\partial\Delta^k} ev_k^*(p_0^*\omega_0\wedge\cdots\wedge 
+    p_k^*\omega_k)|_{\partial\Delta^k}.
+\end{align*}
+The first term, where the $d$ moves inside the integral, matches up with 
+$\sigma$ applied to the term (\ref{l1}) in the Hochschild differential.
+Similarly, by examining the behavior of $ev_k$ along each of the faces 
+$\Delta^{k-1}\subset\Delta^k$ one can check that the integral over the boundary 
+is equal to $\sigma$ applied to terms (\ref{l2}) and (\ref{l3}) of the 
+Hochschild differential. The key point, however, is that in the integral along 
+the last face ($t_k=0$) we need to commute the $p_k^*\omega_k$ all the way to
+the left in order to obtain the term with $\omega_k\wedge\omega_0$ in 
+(\ref{l3}). Hence we are crucially using the
+strict (graded) commutativity of de Rham forms.
+
+
+\end{document}
+
