@@ -19,10 +19,10 @@
     We begin by recalling basic notions around differential forms on simplicial
     manifolds. The main object of study is the complex $A^q(B_\bullet G)$ of
     $q$-forms on the classifying space of a compact Lie group $G$. We compute
-    the cohomology of this complex, originally due to Bott, and discuss as time
-    permits some applications and extensions.
-    These notes were prepared for John Francis' seminar course in the spring 
-    quarter of 2019 at Northwestern.
+    the cohomology of this complex, following a paper of Bott's, and discuss as
+    time permits some applications and extensions.
+    (These notes were prepared for John Francis' seminar course in the spring 
+    quarter of 2019 at Northwestern.)
 \end{abstract}
 
 \maketitle
@@ -39,13 +39,41 @@ category of finite-dimensional smooth manifolds (without boundary).
 \end{definition}
 
 \begin{example}
-    Here are a few standard examples of simplicial manifolds:\marginnote{finish}
+    Here are a few standard examples of simplicial manifolds: 
     \begin{enumerate}
-        \item discrete manifolds
-        \item classifying space of a lie group, universal space
-        \item nerve of a lie groupoid, Cech nerve, prev example
-        \item $W, \bar W$ of simplicial Lie group
-        \item Getzler-Pohorence, integration over local Lagrangians
+        \item First, two trivial examples. If $X_\bullet$ is zero dimensional in 
+            each degree, we obtain a simplicial set. If $X_\bullet$ is given by
+            a fixed manifold $M$ in each degree with the structures maps all the
+            identity, we obtain just a smooth manifold $M$.
+        \item Let $G$ be a Lie group. Then we obtain $B_\bullet G$ given
+            \begin{equation*}
+                B_nG = G^n
+            \end{equation*}
+            where face maps are given by multiplication (except for the first 
+            and last, which are given by projection) and degeneracy maps are 
+            given by insertion of the identity.
+
+            Similarly we obtain the universal $G$-bundle over $B_\bullet G$,
+            \begin{equation*}
+                E_nG = G^{n+1}
+            \end{equation*}
+            whose faces maps are given by forgetting a factor and degeneracy 
+            maps are given by repeating a factor. $G$ acts on $E_\bullet G$ 
+            diagonally on the right and we obtain a projection $E_nG\to B_nG$,
+            \begin{equation*}
+                (h_0,\ldots, h_n) \mapsto (h_1h_0^{-1},\ldots, 
+                h_nh_{n-1}^{-1}).
+            \end{equation*}
+        \item Given a Lie groupoid $\mathcal{G}$ we obtain a simplicial manifold 
+            by applying the usual nerve construction for groupoids. For instance 
+            $B_\bullet G$ is obtained as the nerve of the one-object Lie 
+            groupoid $G$ and $E_\bullet G$ is obtained from the translation 
+            groupoid, which is the action groupoid for the translation 
+            action of $G$ on itself (from the left, say).
+        \item We might think of $B_\bullet G$ as a delooping for the Lie group 
+            $G$. More generally, given a simplicial Lie group $G_\bullet$ there 
+            is a principal $G_\bullet$-bundle $W_\bullet G\to \bar W_\bullet G$ 
+            modelling the universal bundle over the delooping of $G_\bullet$.
     \end{enumerate}
 \end{example}
 
@@ -152,7 +180,13 @@ space. Thus we obtain a functor
 given by first taking the underlying simplicial space and then taking the 
 geometric realization.
 
-simplicial de Rham theorem \marginnote{finish}
+\begin{theorem}[Bott-Shulman-Stasheff]
+    The simplicial de Rham complex computes the ordinary singular cohomology of 
+    the geometric realization of $X_\bullet$:
+    \begin{equation*}
+        H^*(A^*(X_\bullet)) \cong H^*(|X_\bullet|; \R).
+    \end{equation*}
+\end{theorem}
 
 \section{Bott's argument}
 
@@ -178,13 +212,20 @@ The proof of this result has three ingredients:
 \begin{enumerate}
     \item $A^q(B_\bullet G)$ can be obtained as the \textit{basic} 
         $q$-forms on the universal principal $G$-bundle $E_\bullet G$
-    \item by compactness of $G$, the cosimplicial $G$-module $C^\infty(E_\bullet 
-        G)$ admits an extra codegeneracy \marginnote{as a simplicial 
-        $G$-module??} 
+    \item by compactness of $G$, the cosimplicial $G$-module $A^0(E_\bullet 
+        G)$ admits an extra ($G$-invariant) codegeneracy
     \item the first (nonadditive) derived functor of the
         exterior power functor $\Lambda^q$ is a $q$-fold shift of the symmetric
         power functor $\Sym^q$.
 \end{enumerate}
+
+Before we start the proof, let me mention a result that we will use without 
+further mention, whose proof follows by existence of averaging.
+\begin{lemma}
+    For $G$ compact, the functor of invariants $(-)^G$ commutes with cochain 
+    cohomology for cochain complexes of $G$-modules (over $\R$).
+\end{lemma}
+
 
 Let's start with the first step. Instead of working with differential forms on 
 the classifying space $B_\bullet G$, we will work on the total space, which 
@@ -256,7 +297,7 @@ They fit into a short exact sequence
 \begin{equation*}
     0 \to \Sigma^\bullet V \to C^\bullet V \to V^\bullet \to 0.
 \end{equation*}
-Notice that \marginnote{Eilenberg-Zilber?}
+Notice that by Eilenberg-Zilber,
 \begin{align*}
     H^*NC^\bullet V &= H^*(N(C^\bullet\R \otimes V^\bullet)) \\
     &= H^*NC^\bullet\R \otimes H^*NV^\bullet \\
@@ -332,17 +373,29 @@ $G$-invariants of the bicosimplicial $G$-module in parentheses.
     \end{equation*}
 \end{proof}
 
-\begin{proposition}
-    For $G$ compact the Haar measure furnishes a homotopy equivalence
+As one might expect, we can throw away the first term due to the contractibility 
+of the universal bundle.
+\begin{lemma}
+    For $G$ compact there is a weak equivalence 
     \begin{equation*}
         \diag\left( A^0(E_\bullet G) \otimes \Lambda^q\Sigma^\bullet\fr 
         g^\vee \right)^G \simeq \left( \Lambda^q\Sigma^\bullet\fr g^\vee 
         \right)^G.
     \end{equation*}
-    of cosimplicial vector spaces.\marginnote{state this correctly}
-\end{proposition}
-\begin{proof}
-    \marginnote{Finish}
+    of cosimplicial vector spaces (i.e. a quasi-isomorphism on complexes).
+\end{lemma}
+\begin{proof}[Proof sketch]
+    By the (Dold and Puppe generalization of the) Eilenberg-Zilber theorem, the 
+    cohomology of the diagonal can be computed instead as the cohomology of the 
+    total complex of the Moore double complex of the given bisimplicial 
+    $G$-module. Notice that the cosimplicial vector space $A^0(E_\bullet G)$
+    admits an extra codegeneracy (as $E_\bullet G$ admits an extra degeneracy).
+    This is not enough to prove acyclicity of the rows, however, due to the 
+    $(-)^G$. Instead we need an extra codegeneracy of cosimplicial $G$-modules. 
+    This is where the compactness of $G$ comes into play: usually the extra 
+    degeneracy on $E_\bullet G$ is given by insertion of the identity as the 
+    first factor, but we can instead take an average over the insertion of every 
+    element of $G$, using the Haar measure.
 \end{proof}
 
 We now have an equivalence of cosimplicial vector spaces
@@ -350,17 +403,91 @@ We now have an equivalence of cosimplicial vector spaces
     A^q(B_\bullet G) \simeq \left( \Lambda^q\Sigma^\bullet\fr g^\vee \right)^G.
 \end{equation*}
 To finish the proof of Bott's result we must now compute the cohomology of the 
-normalized complex of the right-hand side.
+right-hand side.
 \begin{proposition}
-    There is a weak equivalence\marginnote{State this correctly}
+    There is a weak equivalence
     \begin{equation*}
         N\left( \Lambda^q\Sigma^\bullet\fr g^\vee \right)^G
         \simeq \Sym^q(\fr g^\vee)^G[-q].
     \end{equation*}
 \end{proposition}
+
+The statement involves an interplay between the alternating and symmetric power 
+functors so it is natural to start by thinking about the tensor power functor.
+Write $S_q$ for the symmetric group on $q$ letters and
+\begin{equation*}
+    T^q: \mathsf{Mod}_G \to \mathsf{Bimod}_{(G, S_q)}
+\end{equation*}
+for the functor sending a $G$-module $V$ to the $q$th tensor power
+$V\otimes \cdots\otimes V$ equipped with the diagonal action of $G$ and the 
+permutation action of $S_q$.
+
+\begin{proposition}
+    There is an isomorphism
+    \begin{equation*}
+        H^*N(T^q\Sigma^\bullet V)^G \cong (\bar T^qV)^G[-q].
+    \end{equation*}
+    Here $\bar T^qV$ is $T^qV$ with $\R S_q$-module structure twisted by the 
+    determinant (or sign) character.
+\end{proposition}
 \begin{proof}
-    In the language of Dold and Puppe, we are computing the first (nonadditive) 
-    derived functor of the $q$th tensor power functor.\marginnote{finish}
+    Applying Eilenberg-Zilber,
+    \begin{align*}
+        H^*N(T^q\Sigma^\bullet V)^G &= H^*N(\Sigma^\bullet V\otimes \cdots 
+        \otimes \Sigma^\bullet V)^G \\
+        &\cong H^*\left( N\Sigma^\bullet V \otimes \cdots \otimes 
+        N\Sigma^\bullet V\right)^G \\
+        &\cong \left(H^*N\Sigma^\bullet V\otimes\cdots\otimes H^*N\Sigma^\bullet 
+        V\right)^G \\
+        &\cong (\bar T^q V)^G[-q]
+    \end{align*}
+    The $\bar T^q$ appears instead of the untwisted $T^q$ because the 
+    identification $N(C^\bullet \otimes D^\bullet)\simeq NC^\bullet \otimes 
+    ND^\bullet$ introduces Koszul signs upon permutation of factors.
+\end{proof}
+
+We are interested in subfunctors of the tensor power functor --- in particular 
+the alternating and symmetric power functors. These can be obtained by 
+projection using central idempotents in the group algebra $\R S_q$.
+
+\begin{proof}[Proof of proposition]
+    Let $e\in \R S_q$ be a central idempotent,\footnote{E.g. if $q=2$ then 
+    $e=(1+\tau)/2$ or $e=(1-\tau)/2$, where $\tau$ is the transposition, in the 
+    case of symmetric and alternating powers respectively.}
+    and consider the corresponding direct 
+    sum decomposition
+    \begin{equation*}
+        \begin{tikzcd}
+            e\cdot T^q V\ar[r, bend left, "\iota"] & T^q V\ar[l, bend left, "e"]
+        \end{tikzcd}
+    \end{equation*}
+    We obtain an induced decomposition
+    \begin{equation*}
+        \begin{tikzcd}
+            H^*(N\Sigma^\bullet e\cdot T^q V)^G\ar[r, bend left] & 
+            H^*(N\Sigma^\bullet T^q V)^G\ar[l, bend left]
+            \cong (\bar T^qV)^G[-q]
+        \end{tikzcd}
+    \end{equation*}
+    whence
+    \begin{equation*}
+        H^*(N\Sigma^\bullet e\cdot T^q V)^G = e\cdot (\bar T^qV)^G[-q].
+    \end{equation*}
+
+    The group algebra $\R S_q$ admits an involution $\overline{(\cdot)}$ given by
+    $\sigma\mapsto \bar\sigma=\det\sigma\cdot \sigma$. Twisting the action of $S_q$ 
+    on $T^qV$ by this involution clearly yields $\bar T^qV$, whence we obtain an 
+    isomorphism of underlying vector spaces
+    \begin{equation*}
+        (e \cdot \bar T^qV)^G = (\bar e \cdot T^q V)^G.
+    \end{equation*}
+    We conclude that
+    \begin{equation*}
+        H^*(N\Sigma^\bullet e\cdot T^q V)^G \cong (\bar e \cdot T^q V)^G[-q].
+    \end{equation*}
+    Using the fact that this involution interchanges alternation and
+    symmetrization and taking $V=\fr g^\vee$, we obtain the proposition as well 
+    as Bott's theorem.
 \end{proof}
 
 
@@ -472,6 +599,14 @@ Now, I don't want to go into the notion of nondegeneracy of a 2-form on a
 simplicial manifold, but it is hopefully reasonable that it restricts us to 
 nondegenerate such bilinear forms, so I will declare victory here.
 
+Having symplectic structures on classifying stacks is useful, at least 
+theoretically, because moduli space are often constructed as mapping stacks with 
+target classifying stacks. By arguments that are known as AKSZ-type arguments, 
+symplectic structures can be ``transgressed'' from the classifying stack to the 
+moduli spsace (at the cost of further shifting). This provides a conceptual 
+explanation for the presence of symplectic (or sometimes more generally Poisson) 
+structures on moduli spaces.
+
 \begin{remark}
     Let $G$ be a matrix group like $U(n)$.\marginnote{connectedness?}
     In this case the data of a symplectic structure is the data of forms 
@@ -489,10 +624,11 @@ nondegenerate such bilinear forms, so I will declare victory here.
     We have focused here on $B_\bullet G$, a simplicial representative for the 
     classifying space of principal $G$-bundles. There exist higher categorical 
     analogs of principal bundles known as gerbes: instead of $G$-valued 
-    transition functions on double overlaps of a cover, they're defined by 
+    transition functions on double overlaps of a cover, gerbes are defined by 
     transition functions on triple overlaps. At least in the abelian case, there 
     is a nice theory of these ``bundle gerbes'' and they are classified by the 
     higher delooping $B^2A$ (or if you wish $\bar W^2A$).
+
     It should be straightforward to prove an analog of Bott's result for the
     classifying spaces $B^nA$ for 
     $A$ a compact abelian Lie group ($A=U(1)$ is of interest, say):
