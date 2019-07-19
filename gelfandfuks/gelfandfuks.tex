@@ -1,0 +1,207 @@
+\documentclass{amsart}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}[lemma]{Proposition}
+\newtheorem{definition}[lemma]{Definition}
+\newcommand{\im}{\text{im}}
+\newcommand{\intmul}{\lrcorner\;}
+\newcommand{\mul}{\text{mul}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Vect}{\text{Vect}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\holim}{\text{holim}}
+
+\begin{document}
+
+\title{Notes on Hennion-Kapranov}
+\date{Summer 2019}
+
+\maketitle
+
+\vspace{.5cm}
+
+In this note we detail the computation of the (continuous) Lie algebra 
+cohomology of the Lie algebra of vector fields on a smooth manifold, due 
+originally to Gelfand and Fuks. We follow the exposition of Hennion and 
+Kapranov, which uses the local-to-global tools of factorization homology to 
+compute this cohomology.
+
+Let us outline the idea behind the computation. Let $M$ be a smooth manifold.
+\begin{enumerate}[label=(\roman*)]
+    \item For $U\subset M$ we may consider the cdga
+        \begin{equation*}
+            \mathcal{A}(U) := \mathsf{CE}^*(\Vect(U))
+        \end{equation*}
+        computing the cohomology of vector fields on $U$. The assignment 
+        $U\mapsto \mathcal{A}(U)$ then defines a factorization algebra 
+        $\mathcal{A}$ on $M$, whose global sections (factorization homology) is 
+        the object we would like to calculate. Peculiar to the case of cdgas, 
+        factorization algebras are just (homotopy) cosheaves. Furthermore, the 
+        cosheaf $\mathcal{A}$ is actually locally constant.
+    \item According to Gelfand and Fuks,
+        the Lie algebra cohomology of vector fields can locally be written in 
+        terms of the (Thom-Whitney) cochains of a particular CW complex $Y$. It 
+        follows that the cosheaf $\mathcal{A}$ on $M$ is weakly equivalent to a 
+        certain locally constant cosheaf $\mathcal{Y}$ on $M$ associated to $Y$.
+    \item It now remains to compute the global sections of $\mathcal{Y}$. For 
+        this we use non-abelian Poincar\'e duality, incarnated in this context 
+        as a close relationship between locally constant sheaves and cosheaves,
+        which describes the factorization homology $\mathcal{Y}(M)$ as the space 
+        of sections of a certain fibration over $M$ with fiber $Y$.
+\end{enumerate}
+
+\section{Gelfand-Fuks theory}
+
+
+\section{Globalization}
+
+%To globalize the local theory developed above, Hennion and Kapranov use the 
+%machinery of factorization algebras of cdgas.
+%\begin{definition}
+%    Let $M$ be a smooth manifold and $(\mathcal{C}, \otimes, 1)$ be a symmetric 
+%    monoidal category. A \textbf{prefactorization algebra} $\mathcal{A}$ on $M$ 
+%    with values in $\mathcal{C}$ consists of the following data:
+%    \begin{enumerate}
+%        \item an assignment of an object $\mathcal{A}(U)\in \mathcal{C}$ to each 
+%            open set $U\subset M$, with $A(\varnothing)=1$;
+%        \item 
+%    \end{enumerate}
+%\end{definition}
+
+% TODO compare HK's direct approach with the approach of Lurie in HA
+% TODO understand the relationship between lcfas and diskn algebras
+
+
+
+
+\appendix
+
+\section{The algebraic picture}
+
+In the above we have considered smooth vector fields on smooth manifolds. 
+One might ask, however, whether an analog of the Gelfand-Fuks result holds in 
+the setting of (smooth) algebraic varieties. Hennion and Kapranov note that this 
+question dates back to B.L. Feigin in the 80's, but there was apparently no 
+progress on the question, even for the case of curves. The bulk of their paper 
+is concerned with determining the Lie algebra cohomology of regular vector 
+fields in this case. I am not very familiar with algebraic geometry, which is 
+why I decided to focus on the smooth case. I think it is worth outlining the 
+constructions, though, to get a sense of the ideas involved.
+
+The overall argument is similar to the one described above. For $X$ a smooth 
+affine algebraic variety over $\C$
+we wish to determine the Chevalley-Eilenberg complex of
+the (right derived functor of the) global sections of the tangent sheaf 
+$\mathsf{CE}^\ast(R\Gamma(X, \mathcal{T}_X))$. Let us write 
+$\mathfrak{l}=R\Gamma(X, \mathcal{T}_X)$ in what follows.
+
+We start by representing the Lie algebra homology (tor, not ext) of 
+$\mathfrak{l}$ as the factorization homology of, roughly, a certain 
+$\mathcal{D}$-module on the Ran space $\text{Ran } X$. What do we mean by 
+this? Recall that the Ran space of $X$ is the set of all nonempty finite 
+subsets of $X$, topologized to allow points to collide. In an 
+appropriately general category of algebraic objects, the Ran space can 
+be viewed as the colimit of a certain diagram $X^\mathcal{S}$ of powers 
+of $X$. Here $\mathcal{S}$ is the category of nonempty finite sets and 
+surjections. For $I\twoheadrightarrow J$ the map $X^J\to X^I$ is given 
+by the diagonal embedding corresponding to $I\twoheadrightarrow J$.
+
+Now a \textbf{lax $\mathcal{D}^!$-module} on $X^\mathcal{S}$ is, roughly, the 
+assignment to each variety in the diagram $X^\mathcal{S}$ an object of the 
+derived category of quasicoherent right $\mathcal{D}$-modules in a suitably 
+compatible way. Intuitively, since the Ran space is a colimit, its category 
+of $\mathcal{D}$-modules must be a limit of categories of $\mathcal{D}$-modules 
+on powers of $X$. The word lax is signifying that the compatibility condition 
+can be strengthened to give a notion of strict $\mathcal{D}^!$-module.
+
+Write $\mathcal{L}=L\otimes_{\mathcal{O}_X}\mathcal{D}_X$, where 
+for us, $L=\mathcal{T}_X$.
+Then we can define a 
+lax $\mathcal{D}^!$-module $\mathcal{C}_1$ on $X^\mathcal{S}$ by
+\begin{equation*}
+    \mathcal{C}_{1}^{(I)} = (\delta_I)_* \mathcal{L},
+\end{equation*}
+where $\delta_I: X\to X^I$ is the diagonal embedding.
+Given a surjection $g:I\twoheadrightarrow J$ the corresponding structure map
+\begin{equation*}
+    \delta_g: (\delta_g)_*(\delta_J)_*\mathcal{L} \to (\delta_I)_*\mathcal{L}
+\end{equation*}
+is the isomorphism coming from the equality $\delta_g\circ\delta_J=\delta_I$.
+
+There is a symmetric monoidal product on the category of lax 
+$\mathcal{D}^!$-modules, denoted by $\otimes^*$ (distinct from the ``chiral'' 
+tensor product). It is defined as follows:
+\begin{equation*}
+    (\mathcal{E}\otimes \mathcal{F})^{(I)} = \bigoplus_{I_1\cup I_2=I}
+    \mathcal{E}^{(I_1)} \boxtimes \mathcal{F}^{(I_2)}
+\end{equation*}
+In our case, $\mathcal{C}_1$ becomes a Lie algebra object with respect to this 
+tensor product. Thus we can define
+\begin{equation*}
+    \mathcal{C}_* = (\Sym^{*\geq 1}_{\otimes^*} \mathcal{C}_1[1], 
+    d_{\text{CE}}).
+\end{equation*}
+The factorization homology of $\mathcal{C}_*$, which we now define, will compute 
+the Chevalley-Eilenberg homology of $\mathfrak{l}$.
+
+The factorization homology of a lax $\mathcal{D}^!$-module $\mathcal{E}$ on $X$ 
+is
+\begin{equation*}
+    \int_X \mathcal{E} = \holim_{I\in\mathcal{S}}
+    R\Gamma_{\text{dR}}(X^I, \mathcal{E}^{(I)}) \in 
+    \mathsf{Ind}(\mathsf{Perf})=\mathsf{Ch},
+\end{equation*}
+i.e. the global sections of $\mathcal{E}$ on the Ran space. A few words about 
+$R\Gamma_{\text{dR}}$ are in order: this is the global sections functor applied 
+to the de Rham complex of a $\mathcal{D}$-module. Recall that the de Rham 
+complex is $\text{dR}(\mathcal{M})=\mathcal{M} 
+\otimes^h_{\mathcal{D}_X}\mathcal{O}_X$. With this in mind, Kapranov and Hennion 
+show that
+\begin{equation*}
+    \int_X \mathcal{C}_* \simeq \text{CE}_*(\mathfrak{l}).
+\end{equation*}
+From this, invoking duality, they obtain
+\begin{equation}
+    \text{CE}^*(\mathfrak{l}) \simeq 
+    R\Gamma_{\text{dR}}^{[[c]]}(X^{\mathcal{S}}, \psi(\mathcal{C}^\vee)).
+    \label{ce}
+\end{equation}
+Here we are taking the compactly supported sections of a certain Verdier dual of 
+$\mathcal{C}$. This maneuver is the analog of non-abelian Poincar\'e duality 
+above and the close relationship between sheaves and cosheaves.
+
+Now $\psi(\mathcal{C}^\vee)$ satisfies some nice properties, giving us 
+a factorization algebra (in the usual sense) on $X_{\text{an}}$,
+\begin{equation*}
+    \mathcal{A}(U) = \holim_{I\in\mathcal{S}} R\Gamma_c(U^I, 
+    \text{dR}(\psi(\mathcal{C}^\vee)^{(I)})_{\text{an}}),
+\end{equation*}
+such that its global sections, its factorization homology, on $X_\text{an}$ is 
+the right-hand side of \ref{ce}. Thus we obtain an identification
+\begin{equation*}
+    \int_{X_\text{an}} \mathcal{A} \simeq \text{CE}^*(\mathfrak{l}).
+\end{equation*}
+The remainder of the calculation is now similar to the local argument given in 
+the topological case, showing that the factorization algebra is locally given as 
+a section space, from which the global identification as a certain section space 
+follows.
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
