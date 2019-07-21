@@ -213,7 +213,50 @@ checking version numbers from now on...
 
 ## my liveTeX setup
 
+Before I describe how I like to liveTeX, let me say a few words about why it 
+might be a good idea in the first place.
 
+### keep it digital
+
+I tend to be pretty picky about taking neat and readable notes. This translates 
+to slow note-taking, which is problematic in fast-moving lectures or in contexts 
+where writing long English descriptions and intuitions is just as important as 
+recording mathematical symbols.
+A solution to this problem is to take notes directly 
+in TeX. This approach has a few major advantages:
+
++ it is much easier to record what the lecturer says and does not write on the 
+  board, see for instance these [notes][10]
++ the notes are digital and can be immediately made available online: no need to
+  scan or take a picture or microwave or whatever you do to your notes after 
+  taking them
++ distributing the notes is as easy as email or a script to push them to your 
+  website
+
+But for most people, these advantages are *a priori* outweighed by disadvantages 
+
+- writing TeX fast enough to keep up with a lecturer is difficult
+- the concentration it takes to TeX notes will obstruct real-time understanding
+  of the content being recorded
+- the effort is simply not worth it
+
+Obviously these are very personal objections (especially the last one), but I 
+legitimately believe that the first one is exaggerated.
+
+**Anyone can TeX math faster than they can write it, provided a proper setup and 
+a bit of practice.**
+
+By a proper setup I mean a text editor that you're comfortable with that 
+supports some form of *snippets* engine. I'll explain what I mean by this when I 
+describe my own setup below. Practice is much easier to obtain: you can just 
+head to youtube, find a math lecture, and try to follow along.
+
+### snippets
+
+Let me explain what I mean by snippets. 
+
+
+[10]: https://sites.math.northwestern.edu/~nilay/pdf/factorization_homology.pdf
 
 
 
