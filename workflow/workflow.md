@@ -1,4 +1,4 @@
-# TeX on a Chromebook
+# (live)TeX on a Chromebook
 ## a brief how-to guide
 
 For the past eight or so years my day-to-day laptop usage has consisted of
@@ -241,27 +241,89 @@ But for most people, these advantages are *a priori* outweighed by disadvantages
 - the effort is simply not worth it
 
 Obviously these are very personal objections (especially the last one), but I 
-legitimately believe that the first one is exaggerated.
+legitimately believe that the first one is exaggerated, and given a bit of 
+practice, the second can be mitigated.
 
 **Anyone can TeX math faster than they can write it, provided a proper setup and 
 a bit of practice.**
 
 By a proper setup I mean a text editor that you're comfortable with that 
-supports some form of *snippets* engine. I'll explain what I mean by this when I 
+supports some form of *snippets* engine.
+I'll explain what I mean by this when I 
 describe my own setup below. Practice is much easier to obtain: you can just 
 head to youtube, find a math lecture, and try to follow along.
 
 ### snippets
 
-Let me explain what I mean by snippets. 
+Let me explain what I mean by snippets. A large part of TeX is boilerplate code.
+Not only do you have `begin`/`end` blocks
+```TeX
+    \begin{environment}
+        stuff
+    \end{environment}
+```
+but even in math:
+```TeX
+    \int_{-\infty}^\infty \exp\left(\frac{-x^2}{a}\right) dx.
+```
+In fact, take a second to count how many of the characters in that formula are 
+not really math, but rather LaTeX syntax. The idea behind using snippets
+is to focus on the math by reducing the number of keystrokes required to insert
+lengthy LaTeX commands.
+
+I personally use [`vim`][11] as my editor with the [`UltiSnips`][12] plug-in. 
+The exact software I use is not so important, but I just want to demonstrate how 
+there's always room to speed up your TeXing. I'll place some references below
+if you're interested in my particular setup.
+
+The first example is that of `begin`/`end` environments.
+In the recording below, I have a snippet for throwing in a LaTeX environment in 
+just a couple keystrokes: `b environment [Tab] content [Tab]`:
+
+<a href="https://asciinema.org/a/wxoqUmAPEy93tM6Hmx3WbWs75?t=05&size=medium&rows=40&loop=1">
+<img src = "https://asciinema.org/a/wxoqUmAPEy93tM6Hmx3WbWs75.png" width=400px
+    alt="terminal_recording_1"/>
+</a>
+
+I have a snippet set up so that hitting `[Tab]` after `b` enters the LaTeX 
+syntax and upon hitting `[Tab]` again, allows me to enter the content 
+inside the environment, and upon hitting `[Tab]` one last time, positions my 
+cursor below the environment, to get back to entering text.
+You might also notice that I entered the superscript `c^{2}` without putting in 
+the end brace. I have a snippet that converts `^^` to `^{}` with the cursor 
+positioned inside the braces, and a tab-stop outside on the right.
+
+Any decent snippet engine will give you the flexibility to write your own 
+snippets and customize your keyboard shortcuts.
+To set up all 
+these little snippets takes a bit of time and thought, but it saves you a lot of 
+pain later. If you're hitting up the algebraic topology seminars it might be 
+worth writing some snippets for common `tikzcd` diagrams or if you're hanging 
+out with microlocal analysts you might want snippets for Fourier integral 
+operators, etc. etc.
+
+<a 
+href="https://asciinema.org/a/qTkwyR6Et1B03beqvO1M3TuCv?t=03&size=medium&rows=40&loop=1">
+<img src = "https://asciinema.org/a/qTkwyR6Et1B03beqvO1M3TuCv.png" width=400px
+    alt="terminal_recording_2"/>
+</a>
+
+With a little set up and some practice, I think you'll find that you can TeX
+faster than you can write.
+
+If you're familiar with `vim` and interested in `UltiSnippets`, I recommend
+checking out [Castel's in-depth guide][13] and carefully looking into the 
+`UltiSnips` documentation.
+Otherwise, fret not, for there are
+plenty of other (non-command-line-interface)
+text editors that ship with snippet support,
+such as the ever-popular [Sublime Text][14].
 
 
 [10]: https://sites.math.northwestern.edu/~nilay/pdf/factorization_homology.pdf
-
-
-
-
-
-
+[11]: https://en.wikipedia.org/wiki/Vim_(text_editor)
+[12]: https://github.com/SirVer/ultisnips
+[13]: https://castel.dev/post/lecture-notes-1/
+[14]: http://docs.sublimetext.info/en/latest/extensibility/snippets.html
 
 
