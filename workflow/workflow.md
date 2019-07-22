@@ -113,7 +113,7 @@ machine. They go as follows:
 + `texlive-full`, 4 GB
 
 You can find out what's included, at least on Debian stretch, [here][7].
-These sizes are estimates based on memory, but don't take my word on it.
+These sizes are my vague estimates from memory, but don't take my word on it.
 Running
 ```
     echo 'n' | sudo apt install texlive-full
@@ -189,7 +189,7 @@ default Terminal app that is set up for Crostini may not be as fully-featured
 or responsive as you'd like. Indeed, after installing a few plugins for `vim` 
 (I'll talk about some of these below) scrolling slowed down a bit. This might 
 not be an issue for you if you're using a Chromebook with a reasonable 
-processor, but I ended up installing gnome-terminal and using that instead. I 
+processor, but I ended up installing `gnome-terminal` and using that instead. I 
 find it to be a bit quicker, though for some reason it doesn't automatically 
 create an icon in the Chrome launcher. This has to be done [manually][9].
 There's a long list of terminals that people like to use and a lot of them work 
@@ -242,7 +242,7 @@ But for most people, these advantages are *a priori* outweighed by disadvantages
 
 Obviously these are very personal objections (especially the last one), but I 
 legitimately believe that the first one is exaggerated, and given a bit of 
-practice, the second can be mitigated.
+practice, the second can be mitigated:
 
 **Anyone can TeX math faster than they can write it, provided a proper setup and 
 a bit of practice.**
@@ -311,13 +311,17 @@ href="https://asciinema.org/a/qTkwyR6Et1B03beqvO1M3TuCv?t=03&size=medium&rows=40
 With a little set up and some practice, I think you'll find that you can TeX
 faster than you can write.
 
-If you're familiar with `vim` and interested in `UltiSnippets`, I recommend
+If you're familiar with `vim` and interested in `UltiSnips`, I recommend
 checking out [Castel's in-depth guide][13] and carefully looking into the 
-`UltiSnips` documentation.
+`UltiSnips` documentation and screencasts.
 Otherwise, fret not, for there are
 plenty of other (non-command-line-interface)
 text editors that ship with snippet support,
 such as the ever-popular [Sublime Text][14].
+
+*Disclaimer*: out of everyone I've ever met who liveTeX's I am certifiably the 
+worst. So please go read other guides out there and then let me know what tricks 
+you learn!
 
 
 [10]: https://sites.math.northwestern.edu/~nilay/pdf/factorization_homology.pdf
